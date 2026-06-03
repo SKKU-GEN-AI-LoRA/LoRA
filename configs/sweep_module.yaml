@@ -1,0 +1,8 @@
+# E3 — Target module sweep. Fix r=8, alpha=16 (design §8).
+# [Main result 2] Pareto of (accuracy vs trainable params) per module combination.
+base: configs/lora_r8_qv.yaml
+output_root: checkpoints/sweeps/module
+runs:
+  - {name: qv,       target_modules: [q_proj, v_proj]}
+  - {name: qkvo,     target_modules: [q_proj, k_proj, v_proj, o_proj]}
+  - {name: qkvo_mlp, target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]}

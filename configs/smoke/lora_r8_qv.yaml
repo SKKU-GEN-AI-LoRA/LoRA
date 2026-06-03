@@ -1,0 +1,32 @@
+# Smoke baseline — fast CPU/Colab-free reproduction of the full pipeline.
+# Same code path as configs/lora_r8_qv.yaml but tiny: 0.5B model, few steps,
+# small eval subset, float32 (CPU/MPS safe). Proves train→eval→save works end
+# to end in minutes. NOT a research result — use the full configs for that.
+method: lora
+model_name: Qwen/Qwen2.5-0.5B-Instruct
+
+r: 8
+alpha: 16.0                # scaling = alpha/r = 2.0
+target_modules: [q_proj, v_proj]
+lora_dropout: 0.0
+lora_init: gaussian
+
+train_dataset: medmcqa
+train_subset: 200
+eval_datasets: [medmcqa, medqa, pubmedqa]
+eval_subset: 40
+max_length: 384
+
+lr: 2.0e-4
+batch_size: 4
+grad_accum: 1
+epochs: 1
+max_steps: 40
+warmup_ratio: 0.03
+weight_decay: 0.0
+grad_checkpointing: false
+log_every: 10
+
+seed: 42
+output_dir: checkpoints/smoke/lora_r8_qv
+dtype: float32

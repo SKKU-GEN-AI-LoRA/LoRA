@@ -1,0 +1,7 @@
+# Smoke scaling sweep — r=8 fixed, alpha/r in {0.5, 1, 2} (E4) on the tiny setup.
+base: configs/smoke/lora_r8_qv.yaml
+output_root: checkpoints/smoke/sweeps/alpha
+runs:
+  - {name: scale0p5, alpha: 4.0}   # alpha/r = 0.5
+  - {name: scale1,   alpha: 8.0}   # alpha/r = 1.0
+  - {name: scale2,   alpha: 16.0}  # alpha/r = 2.0

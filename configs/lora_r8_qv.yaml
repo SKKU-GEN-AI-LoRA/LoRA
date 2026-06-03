@@ -1,0 +1,32 @@
+# E1 baseline — LoRA r=8, target={q,v}, scaling alpha/r=2 (design §7 E1)
+# Also used as the base config for the sweeps.
+method: lora
+model_name: Qwen/Qwen2.5-1.5B-Instruct   # fallback: Qwen/Qwen2.5-0.5B-Instruct
+
+# LoRA hyperparameters
+r: 8
+alpha: 16.0                # scaling = alpha/r = 2.0
+target_modules: [q_proj, v_proj]
+lora_dropout: 0.0
+lora_init: gaussian
+
+# Data
+train_dataset: medmcqa
+train_subset: 10000        # null = full 182,822
+eval_datasets: [medmcqa, medqa, pubmedqa]
+eval_subset: null
+max_length: 512
+
+# Training
+lr: 2.0e-4
+batch_size: 8
+grad_accum: 2
+epochs: 1
+warmup_ratio: 0.03
+weight_decay: 0.0
+grad_checkpointing: false
+log_every: 20
+
+seed: 42
+output_dir: checkpoints/lora_r8_qv
+dtype: bfloat16

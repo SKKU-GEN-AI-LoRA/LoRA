@@ -1,0 +1,7 @@
+# E5 — LoRA vs Full FT vs Zero-shot. [Main result 3] performance-memory-time trade-off.
+base: configs/lora_r8_qv.yaml
+output_root: checkpoints/sweeps/method
+runs:
+  - {name: zeroshot, method: zeroshot}
+  - {name: lora_r8,  method: lora, r: 8, alpha: 16.0}
+  - {name: full_ft,  method: full, lr: 1.0e-5, batch_size: 4, grad_accum: 4, grad_checkpointing: true}

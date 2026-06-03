@@ -1,0 +1,7 @@
+# Smoke target-module sweep — {q,v} vs {q,k,v,o} vs +MLP on the tiny setup (E3).
+base: configs/smoke/lora_r8_qv.yaml
+output_root: checkpoints/smoke/sweeps/module
+runs:
+  - {name: qv,       target_modules: [q_proj, v_proj]}
+  - {name: qkvo,     target_modules: [q_proj, k_proj, v_proj, o_proj]}
+  - {name: qkvo_mlp, target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]}

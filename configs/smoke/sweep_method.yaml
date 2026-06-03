@@ -1,0 +1,7 @@
+# Smoke method sweep — zero-shot vs LoRA vs Full FT on the tiny 0.5B setup (E5).
+base: configs/smoke/lora_r8_qv.yaml
+output_root: checkpoints/smoke/sweeps/method
+runs:
+  - {name: zeroshot, method: zeroshot}
+  - {name: lora_r8,  method: lora, r: 8, alpha: 16.0}
+  - {name: full_ft,  method: full, lr: 1.0e-5, max_steps: 20}

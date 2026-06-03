@@ -1,0 +1,10 @@
+# E5 / E1 baseline — evaluate the pretrained model as-is (no training).
+# Lower-bound reference for all benchmarks.
+method: zeroshot
+model_name: Qwen/Qwen2.5-1.5B-Instruct
+eval_datasets: [medmcqa, medqa, pubmedqa]
+eval_subset: null
+max_length: 512
+seed: 42
+output_dir: checkpoints/zeroshot
+dtype: bfloat16

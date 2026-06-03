@@ -1,0 +1,10 @@
+# E2 — Rank sweep. Fix alpha/r (scaling=2) to isolate the rank effect (design §8, R4).
+# [Main result 1] rank vs (accuracy, trainable params)
+base: configs/lora_r8_qv.yaml
+output_root: checkpoints/sweeps/rank
+runs:
+  - {name: r1,  r: 1,  alpha: 2.0}
+  - {name: r4,  r: 4,  alpha: 8.0}
+  - {name: r8,  r: 8,  alpha: 16.0}
+  - {name: r16, r: 16, alpha: 32.0}
+  - {name: r32, r: 32, alpha: 64.0}

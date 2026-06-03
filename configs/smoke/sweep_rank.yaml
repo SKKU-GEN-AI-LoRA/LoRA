@@ -1,0 +1,8 @@
+# Smoke rank sweep — reduced grid for a fast, runnable reproduction of E2.
+base: configs/smoke/lora_r8_qv.yaml
+output_root: checkpoints/smoke/sweeps/rank
+runs:
+  - {name: r1,  r: 1,  alpha: 2.0}
+  - {name: r4,  r: 4,  alpha: 8.0}
+  - {name: r8,  r: 8,  alpha: 16.0}
+  - {name: r16, r: 16, alpha: 32.0}

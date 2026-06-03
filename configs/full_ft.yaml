@@ -1,0 +1,20 @@
+# E5 — Full fine-tuning baseline (upper bound). Trains all weights.
+# 1.5B full FT is memory-heavy → grad_checkpointing + small batch (design R5).
+method: full
+model_name: Qwen/Qwen2.5-1.5B-Instruct
+
+train_dataset: medmcqa
+train_subset: 10000
+eval_datasets: [medmcqa, medqa, pubmedqa]
+max_length: 512
+
+lr: 1.0e-5                 # full FT uses a much smaller lr than LoRA
+batch_size: 4
+grad_accum: 4
+epochs: 1
+warmup_ratio: 0.03
+grad_checkpointing: true
+
+seed: 42
+output_dir: checkpoints/full_ft
+dtype: bfloat16
