@@ -1,0 +1,44 @@
+[project]
+name = "llm-lora"
+version = "0.1.0"
+description = "LoRA from scratch: analysis of how rank/target-module/scaling affect small-LLM medical-domain adaptation performance and resource efficiency"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.2",
+    "transformers>=4.44",   # model/tokenizer loading only (LoRA injection is from scratch)
+    "datasets>=2.20",       # medical QA data loading
+    "accelerate>=0.33",     # device management
+    "matplotlib>=3.8",
+    "tqdm>=4.66",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+qlora = ["bitsandbytes>=0.43"]    # (optional) QLoRA stretch goal
+dev = ["ruff>=0.6", "pytest>=8.0"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["config"]
+packages = ["lora", "data", "eval"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# Entry-point scripts prepend the repo root to sys.path before importing local
+# packages, so imports legitimately follow code (E402).
+"scripts/*" = ["E402"]
+"eval/*" = ["E402"]
+"tests/*" = ["E402"]
+# Colab notebooks use compact, cell-local import style. F401 is ignored because
+# names used only inside IPython `!{var}` shell magic read as unused to ruff.
+"notebooks/*" = ["E402", "E401", "E701", "E702", "E501", "I001", "B018", "F401"]
