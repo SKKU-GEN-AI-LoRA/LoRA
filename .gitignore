@@ -17,3 +17,6 @@ checkpoints/**
 
 # OS
 .DS_Store
+
+# Notebook-generated custom config (interactive editor cell)
+configs/_custom.yaml
