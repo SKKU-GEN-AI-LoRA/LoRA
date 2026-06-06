@@ -1,0 +1,29 @@
+# High-capacity smoke run: r=32 on ALL attention+MLP modules (a few % trainable),
+# same heavy training as perf2. Tests whether raising trainable % beats 0.109%.
+method: lora
+model_name: Qwen/Qwen2.5-0.5B-Instruct
+
+r: 32
+alpha: 64.0                 # scaling = alpha/r = 2.0
+target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+lora_dropout: 0.0
+lora_init: gaussian
+
+train_dataset: medmcqa
+train_subset: 6000
+eval_datasets: [medmcqa, medqa, pubmedqa]
+eval_subset: 100
+max_length: 384
+
+lr: 2.0e-4
+batch_size: 4
+grad_accum: 1
+epochs: 1
+max_steps: 1000
+warmup_ratio: 0.03
+weight_decay: 0.0
+log_every: 100
+
+seed: 42
+output_dir: checkpoints/smoke/highcap/lora
+dtype: float32

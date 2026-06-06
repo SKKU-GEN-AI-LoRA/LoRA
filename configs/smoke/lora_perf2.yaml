@@ -1,0 +1,29 @@
+# Heavier smoke run: same 0.109% (r8, {q,v}) but much more training (6000 / 1000 steps).
+# Tests whether simply training longer pushes the 0.5B LoRA further above the base.
+method: lora
+model_name: Qwen/Qwen2.5-0.5B-Instruct
+
+r: 8
+alpha: 16.0
+target_modules: [q_proj, v_proj]
+lora_dropout: 0.0
+lora_init: gaussian
+
+train_dataset: medmcqa
+train_subset: 6000
+eval_datasets: [medmcqa, medqa, pubmedqa]
+eval_subset: 100
+max_length: 384
+
+lr: 2.0e-4
+batch_size: 4
+grad_accum: 1
+epochs: 1
+max_steps: 1000
+warmup_ratio: 0.03
+weight_decay: 0.0
+log_every: 100
+
+seed: 42
+output_dir: checkpoints/smoke/perf2/lora
+dtype: float32
