@@ -1,0 +1,7 @@
+# Performance-oriented comparison: base (zero-shot) vs a more-trained LoRA,
+# both evaluated on the same 100-example sets for a fair Delta-vs-base.
+base: configs/smoke/lora_perf.yaml
+output_root: checkpoints/smoke/sweeps/perf
+runs:
+  - {name: zeroshot, method: zeroshot}
+  - {name: lora_r8_more, method: lora}

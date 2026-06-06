@@ -1,0 +1,29 @@
+# Performance-oriented full-scale config (Colab GPU): 1.5B, more data, full eval,
+# higher rank + more attention modules. Aim: clearly beat the zero-shot base in-domain.
+method: lora
+model_name: Qwen/Qwen2.5-1.5B-Instruct
+
+r: 16
+alpha: 32.0                 # scaling = alpha/r = 2.0
+target_modules: [q_proj, k_proj, v_proj, o_proj]
+lora_dropout: 0.05
+lora_init: gaussian
+
+train_dataset: medmcqa
+train_subset: 20000
+eval_datasets: [medmcqa, medqa, pubmedqa]
+eval_subset: null          # full eval split (leaderboard-style numbers)
+max_length: 512
+
+lr: 2.0e-4
+batch_size: 8
+grad_accum: 2
+epochs: 2
+warmup_ratio: 0.03
+weight_decay: 0.0
+grad_checkpointing: true
+log_every: 50
+
+seed: 42
+output_dir: checkpoints/lora_perf
+dtype: bfloat16
