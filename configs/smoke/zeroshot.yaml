@@ -1,0 +1,10 @@
+# Smoke zero-shot baseline — evaluate the base 0.5B model with no adaptation.
+# This is the reference every adapted result is compared against (Delta vs base).
+method: zeroshot
+model_name: Qwen/Qwen2.5-0.5B-Instruct
+eval_datasets: [medmcqa, medqa, pubmedqa]
+eval_subset: 40
+max_length: 384
+seed: 42
+output_dir: checkpoints/smoke/zeroshot
+dtype: float32
