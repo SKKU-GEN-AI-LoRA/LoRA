@@ -1,5 +1,8 @@
 # LoRA from Scratch
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SKKU-GEN-AI-LoRA/LoRA/blob/main/notebooks/LoRA_medical_QA.ipynb)
+
+
 A from-scratch implementation of **LoRA (Low-Rank Adaptation)** — no `peft`, no
 Hugging Face `Trainer` — and a systematic study of how **rank**, **target modules**,
 and **scaling** affect adapting a small LLM to the medical-QA domain, measured on
